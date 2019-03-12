@@ -17,13 +17,14 @@ export class App {
             this.rootElement,
         );
 
-        this.loadFile();
+        this.loadFile('/samples/CZcounties.geojson');
+        this.loadFile('/samples/CZdistricts.geojson');
+        //this.loadFile('/samples/DEbld.geojson');
+        
     }
 
-    async loadFile() {
-        const geoJson = (await (await fetch(
-            '/samples/CZcounties.geojson',
-        )).json()) as IGeoJson;
-        this.appState.opened = geoJson;
+    async loadFile(url: string) {
+        const geoJson = (await (await fetch(url)).json()) as IGeoJson;
+        this.appState.opened.push(geoJson);
     }
 }

@@ -16,18 +16,20 @@ type IMapBoundaries = [
 ];
 
 export const Map = observer(({ appState }: IMapProps) => {
-    if (!appState.opened) {
-        return <>Opening</>;
-    }
+    const coordinatesWGS84All = appState.opened.reduce(
+        (coords, geoJson) => [
+            ...coords,
+            ...geoJson.features.reduce(
+                (coords, feature) => [
+                    ...coords,
+                    ...feature.geometry.coordinates[0],
+                ],
+                [] as [number, number][],
+            ),
+        ],
 
-    const coordinatesWGS84 =
-        appState.opened.features[0].geometry.coordinates[0];
-    const coordinatesWGS84All = appState.opened.features.reduce(
-        (coords, feature) => [...coords, ...feature.geometry.coordinates[0]],
         [] as [number, number][],
     );
-
-    console.log(coordinatesWGS84);
 
     const boundaries = coordinatesWGS84All.reduce(
         (boundaries, coords) => {
@@ -44,49 +46,48 @@ export const Map = observer(({ appState }: IMapProps) => {
         [null, null, null, null] as IMapBoundaries,
     );
 
-    const width=800,height=500;
+    const width = 800,
+        height = 500;
 
     return (
         <div className="Map">
-            {!appState.opened ? (
-                <>Opening</>
-            ) : (
-                <>
-                    <svg
-                        {...{width,height}}
-                        style={{ border: '2px solid red' }}
-                    >
-                        {appState.opened.features.map((feature) => (
-                            <polygon
-                                points={feature.geometry.coordinates[0]
-                                    .map(([lat, lng]) => [
-                                        1 -
+            <svg {...{ width, height }} style={{ border: '2px solid red' }}>
+                {appState.opened.map((geoJson) => (
+                    <>
+                        {geoJson.features.map((feature) =>
+                            feature.geometry.coordinates.map((polygon) => (
+                                <polygon
+                                    points={polygon
+                                        .map(([lat, lng]) => [
+                                            1 -
+                                                toRelativeBoundaries(
+                                                    lat,
+                                                    boundaries[0]!,
+                                                    boundaries[2]!,
+                                                ),
                                             toRelativeBoundaries(
-                                                lat,
-                                                boundaries[0]!,
-                                                boundaries[2]!,
+                                                lng,
+                                                boundaries[1]!,
+                                                boundaries[3]!,
                                             ),
-                                        toRelativeBoundaries(
-                                            lng,
-                                            boundaries[1]!,
-                                            boundaries[3]!,
-                                        ),
-                                    ])
-                                    .map(
-                                        ([lat, lng]) =>
-                                            `${lat * width},${lng * height}`,
-                                    )
-                                    .join(' ')}
-                                style={{
-                                    fill: 'lime',
-                                    stroke: 'purple',
-                                    strokeWidth: 1,
-                                }}
-                            />
-                        ))}
-                    </svg>
-                </>
-            )}
+                                        ])
+                                        .map(
+                                            ([lat, lng]) =>
+                                                `${lat * width},${lng *
+                                                    height}`,
+                                        )
+                                        .join(' ')}
+                                    style={{
+                                        fill: 'lime',
+                                        stroke: 'purple',
+                                        strokeWidth: 1,
+                                    }}
+                                />
+                            )),
+                        )}
+                    </>
+                ))}
+            </svg>
         </div>
     );
 });

@@ -18,9 +18,14 @@ export type IGeoJson = {
             NAZEV_ENG: string;
             county: string;
         };
-        geometry: {
-            type: 'Polygon';
-            coordinates: [[number, number][]];
-        };
+        geometry:
+            | {
+                  type: 'Polygon';
+                  coordinates: [[number, number][]];
+              }
+            | {
+                  type: 'MultiPolygon';
+                  coordinates: [[number, number][]];
+              };
     }[];
 };
