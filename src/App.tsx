@@ -1,26 +1,29 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { IAppState } from './model/IAppState';
-import { ISaveState } from './controller/saver/ISaveState';
-import { IObservableObject } from 'mobx';
-import { restoreAppState } from './controller/saver/restoreAppState';
-import { saveAppStateAfterChange } from './controller/saver/saveAppStateAfterChange';
+import { IObservableObject, observable } from 'mobx';
 import { Root } from './view/Root/Root';
+import { IGeoJson } from './model/IGeoJson';
+import { createDefaultAppState } from './model/createDefaultAppState';
 
 export class App {
     constructor(private rootElement: HTMLDivElement) {}
 
     public appState: IAppState & IObservableObject;
-    public saveState: ISaveState & IObservableObject;
-    run() {
-        this.appState = restoreAppState();
-        this.saveState = saveAppStateAfterChange(this.appState);
-
+    async run() {
+        this.appState = observable(createDefaultAppState());
         ReactDOM.render(
-            <Root
-                {...{ appState: this.appState, saveState: this.saveState }}
-            />,
+            <Root {...{ appState: this.appState }} />,
             this.rootElement,
         );
+
+        this.loadFile();
+    }
+
+    async loadFile() {
+        const geoJson = (await (await fetch(
+            '/samples/CZcounties.geojson',
+        )).json()) as IGeoJson;
+        this.appState.opened = geoJson;
     }
 }

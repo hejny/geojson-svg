@@ -1,7 +1,7 @@
 {
-  "name": "app",
+  "name": "geojson-svg",
   "version": "0.1.0",
-  "homepage": "https://hejny.github.io/app/",
+  "homepage": "https://hejny.github.io/geojson-svg/",
   "private": false,
   "scripts": {
     "start": "react-scripts-ts start",

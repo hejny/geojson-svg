@@ -1,6 +1,6 @@
-# App
+# GeoJSON SVG
 
-
+Show your GeoJSONs in SVG images.
 
 ## Develop
 
@@ -15,4 +15,4 @@ npm install
 
 ```bash
 npm run
-```a
+```

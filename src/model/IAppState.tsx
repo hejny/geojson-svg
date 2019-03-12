@@ -1,3 +1,5 @@
+import { IGeoJson } from './IGeoJson';
+
 export interface IAppState {
-    message: string;
+    opened: IGeoJson | null;
 }
