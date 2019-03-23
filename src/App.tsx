@@ -3,8 +3,8 @@ import * as ReactDOM from 'react-dom';
 import { IAppState } from './model/IAppState';
 import { IObservableObject, observable } from 'mobx';
 import { Root } from './view/Root/Root';
-import { IGeoJson } from './model/IGeoJson';
 import { createDefaultAppState } from './model/createDefaultAppState';
+import { IGeoJson } from './geo/IGeoJson';
 
 export class App {
     constructor(private rootElement: HTMLDivElement) {}
@@ -19,8 +19,7 @@ export class App {
 
         this.loadFile('/samples/CZcounties.geojson');
         this.loadFile('/samples/CZdistricts.geojson');
-        //this.loadFile('/samples/DEbld.geojson');
-        
+        this.loadFile('/samples/DEbld.geojson');
     }
 
     async loadFile(url: string) {
