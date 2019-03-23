@@ -19,7 +19,11 @@ export class App {
 
         this.loadFile('/samples/CZcounties.geojson');
         this.loadFile('/samples/CZdistricts.geojson');
-        this.loadFile('/samples/DEbld.geojson');
+
+        setTimeout(()=>{
+            this.loadFile('/samples/DEbld.geojson');
+        },2000);
+        
     }
 
     async loadFile(url: string) {

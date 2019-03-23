@@ -7,7 +7,7 @@ import {
     aggegateGeoJsonCoordinates,
     aggegateGeoJsonFeatureCoordinates,
 } from '../../geo/aggegateCoordinates';
-import { getBoundaries } from '../../geo/getBoundaries';
+import { getBoundaries, isBoundariesDefined, boundariesRange } from '../../geo/getBoundaries';
 
 interface IMapProps {
     appState: IAppState & IObservableObject;
@@ -25,15 +25,22 @@ export const Map = observer(({ appState }: IMapProps) => {
 
     const boundaries = getBoundaries(coordinatesWGS84All);
 
-    const width = 800,
-        height = 500;
+    if(!isBoundariesDefined(boundaries)){
+        return(<div>Loading</div>);
+    }
+
+    const [lat,lng] = boundariesRange(boundaries);
+    
+    const width = 1000,
+        height = 1000*lng/lat*1.7;
 
     return (
         <div className="Map">
             <svg {...{ width, height }} style={{ border: '2px solid red' }}>
                 {appState.opened.map((geoJson) =>
-                    geoJson.features.map((feature) => (
+                    geoJson.features.map((feature,i) => (
                         <polygon
+                            key={i}
                             points={aggegateGeoJsonFeatureCoordinates(feature)
                                 .map(([lat, lng]) => [
                                     1 -
