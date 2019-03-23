@@ -12,7 +12,7 @@ interface IAppProps {
 export const Root = observer(({ appState }: IAppProps) => {
     return (
         <div className="Root">
-            <Map {...{ appState }} />
+            <Map width={500} {...{ appState }} />
         </div>
     );
 });
