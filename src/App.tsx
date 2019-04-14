@@ -17,17 +17,21 @@ export class App {
             this.rootElement,
         );
 
-        this.loadFile('/samples/CZcounties.geojson');
-        this.loadFile('/samples/CZdistricts.geojson');
-
-        setTimeout(()=>{
-            this.loadFile('/samples/DEbld.geojson');
-        },2000);
-        
+        //this.loadFile('/samples/CZcounties.geojson');
+        //this.loadFile('/samples/CZdistricts.geojson');
+        //setTimeout(()=>{
+        //    this.loadFile('/samples/DEbld.geojson');
+        //},2000);
     }
 
-    async loadFile(url: string) {
-        const geoJson = (await (await fetch(url)).json()) as IGeoJson;
+    async loadGeoJson(geoJson: IGeoJson) {
         this.appState.opened.push(geoJson);
     }
+
+    /*
+    async loadFile(url: string) {
+        const geoJson = (await (await fetch(url)).json()) as IGeoJson;
+        this.loadGeoJson(geoJson);
+    }
+    */
 }

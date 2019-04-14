@@ -17,12 +17,14 @@ export function getBoundaries(coordinates: ICoord[]): IMapBoundaries {
     );
 }
 
-export function isBoundariesDefined(boundaries: IMapBoundaries): boundaries is IMapBoundariesDefined{
-    return boundaries.every(boundary=>!!boundary);
+export function isBoundariesDefined(
+    boundaries: IMapBoundaries,
+): boundaries is IMapBoundariesDefined {
+    return boundaries.every((boundary) => !!boundary);
 }
 
-export function boundariesRange(boundaries: IMapBoundariesDefined):ICoord{
-    return [boundaries[2]-boundaries[0],boundaries[3]-boundaries[1]];
+export function boundariesRange(boundaries: IMapBoundariesDefined): ICoord {
+    return [boundaries[2] - boundaries[0], boundaries[3] - boundaries[1]];
 }
 
 //todo use here coord
@@ -33,10 +35,4 @@ export type IMapBoundaries = [
     number | null
 ];
 
-
-export type IMapBoundariesDefined = [
-    number,
-    number,
-    number,
-    number
-];
+export type IMapBoundariesDefined = [number, number, number, number];

@@ -8,6 +8,11 @@ export type IGeoJson = {
 export interface IGeoJsonFeature {
     type: string;
     properties: {
+        //todo IPlaceItem
+        id: number | string | null;
+        type: string;
+
+        value: number | null;
         AREA: number;
         PERIMETER: number;
         NAZEV: number;

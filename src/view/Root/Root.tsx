@@ -14,7 +14,7 @@ export const Root = observer(({ appState }: IAppProps) => {
     return (
         <div className="Root">
             <Map width={500} {...{ appState }} />
-            <MapLegend  {...{ appState }} />
+            <MapLegend {...{ appState }} />
         </div>
     );
 });

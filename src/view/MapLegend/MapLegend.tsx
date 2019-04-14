@@ -9,10 +9,5 @@ interface IMapLegendProps {
 }
 
 export const MapLegend = observer(({ appState }: IMapLegendProps) => {
-
-    return (
-        <div className="MapLegend">
-           MapLegend
-        </div>
-    );
+    return <div className="MapLegend">MapLegend</div>;
 });

@@ -7,7 +7,11 @@ import {
     aggegateGeoJsonCoordinates,
     aggegateGeoJsonFeatureCoordinates,
 } from '../../geo/aggegateCoordinates';
-import { getBoundaries, isBoundariesDefined, boundariesRange } from '../../geo/getBoundaries';
+import {
+    getBoundaries,
+    isBoundariesDefined,
+    boundariesRange,
+} from '../../geo/getBoundaries';
 import { IGeoJsonFeature } from '../../geo/IGeoJson';
 
 interface IMapProps {
@@ -27,19 +31,19 @@ export const Map = observer(({ appState, width }: IMapProps) => {
 
     const boundaries = getBoundaries(coordinatesWGS84All);
 
-    if(!isBoundariesDefined(boundaries)){
-        return(<div>Loading</div>);
+    if (!isBoundariesDefined(boundaries)) {
+        return <div>Loading</div>;
     }
 
-    const [lat,lng] = boundariesRange(boundaries);
-    
-    const height = width*lng/lat*1.6;
+    const [lat, lng] = boundariesRange(boundaries);
+
+    const height = ((width * lng) / lat) * 1.6;
 
     return (
         <div className="Map">
             <svg {...{ width, height }}>
                 {appState.opened.map((geoJson) =>
-                    geoJson.features.map((feature,i) => (
+                    geoJson.features.map((feature, i) => (
                         <polygon
                             key={i}
                             points={aggegateGeoJsonFeatureCoordinates(feature)
@@ -66,8 +70,12 @@ export const Map = observer(({ appState, width }: IMapProps) => {
                                 stroke: 'purple',
                                 strokeWidth: 1,
                             }}
-                            onClick={()=>{
-                                console.log('feature',feature);
+                            onClick={() => {
+                                console.log('feature', feature);
+                                console.log(
+                                    'feature.properties.OKRES',
+                                    feature.properties.id,
+                                );
                             }}
                         />
                     )),
@@ -76,13 +84,13 @@ export const Map = observer(({ appState, width }: IMapProps) => {
         </div>
     );
 });
-function colorFromValue(value:number):string{
-    const r = Math.floor(value*255);
+function colorFromValue(value: number): string {
+    const r = Math.floor(value * 255);
     return `rgb(${r},${r},${r})`;
 }
 
-function getFeatureValue(feature: IGeoJsonFeature):number{
-    return Math.random();//feature.properties.AREA/3162900000;
+function getFeatureValue(feature: IGeoJsonFeature): number {
+    return Math.random(); //feature.properties.AREA/3162900000;
 }
 
 function toRelativeBoundaries(value: number, max: number, min: number): number {
