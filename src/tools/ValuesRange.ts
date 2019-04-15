@@ -3,7 +3,7 @@ interface IRange {
     max: number;
 }
 
-export class ValueRange {
+export class ValuesRange {
     private values: number[] = [];
     private range: IRange | null = null;
 
@@ -26,7 +26,7 @@ export class ValueRange {
         const rangedValue =
             (value - this.range.min) / (this.range.max - this.range.min);
 
-        console.log('rangedValue', rangedValue);
+        //console.log('rangedValue', rangedValue);
 
         return rangedValue;
     }

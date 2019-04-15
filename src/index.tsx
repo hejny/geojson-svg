@@ -36,7 +36,7 @@ async function main() {
         feature.properties.value = value;
     }
 
-    console.log('geoJson', geoJson);
+    //console.log('geoJson', geoJson);
 
     app.loadGeoJson(geoJson);
 

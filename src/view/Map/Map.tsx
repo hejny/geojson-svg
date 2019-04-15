@@ -12,8 +12,7 @@ import {
     isBoundariesDefined,
     boundariesRange,
 } from '../../tools/getBoundaries';
-import { IGeoJsonFeature } from '../../tools/IGeoJson';
-import { ValueRange } from 'src/tools/ValueRange';
+import { getFeatureValue } from 'src/tools/getFeatureValue';
 
 interface IMapProps {
     width: number;
@@ -39,15 +38,6 @@ export const Map = observer(({ appState, width }: IMapProps) => {
     const [lat, lng] = boundariesRange(boundaries);
 
     const height = ((width * lng) / lat) * 1.6;
-
-    const valueRange = new ValueRange();
-    for (const geoJson of appState.opened) {
-        for (const feature of geoJson.features) {
-            if (feature.properties.value) {
-                valueRange.pushValue(getFeatureValue(feature));
-            }
-        }
-    }
 
     return (
         <div className="Map">
@@ -77,7 +67,7 @@ export const Map = observer(({ appState, width }: IMapProps) => {
                                 .join(' ')}
                             style={{
                                 fill: colorFromValue(
-                                    valueRange.getValue(
+                                    appState.valuesRange.getValue(
                                         getFeatureValue(feature),
                                     ),
                                 ),
@@ -100,10 +90,6 @@ export const Map = observer(({ appState, width }: IMapProps) => {
 function colorFromValue(value: number): string {
     const r = Math.floor(value * 255);
     return `rgb(${r},${r},${r})`;
-}
-
-function getFeatureValue(feature: IGeoJsonFeature): number {
-    return feature.properties.value || 0;
 }
 
 function toRelativeBoundaries(value: number, max: number, min: number): number {

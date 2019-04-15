@@ -4,7 +4,9 @@ import { IAppState } from './model/IAppState';
 import { IObservableObject, observable } from 'mobx';
 import { Root } from './view/Root/Root';
 import { createDefaultAppState } from './model/createDefaultAppState';
-import { IGeoJson } from './tools/IGeoJson';
+import { IGeoJson, IGeoJsonFeature } from './tools/IGeoJson';
+import { ValuesRange } from './tools/ValuesRange';
+import { getFeatureValue } from './tools/getFeatureValue';
 
 export class App {
     constructor(private rootElement: HTMLDivElement) {}
@@ -25,7 +27,20 @@ export class App {
     }
 
     async loadGeoJson(geoJson: IGeoJson) {
+        this.recountRange(geoJson);
         this.appState.opened.push(geoJson);
+    }
+
+    private recountRange(geoJsonNew: IGeoJson) {
+        const valuesRange = new ValuesRange();
+        for (const geoJson of [...this.appState.opened, geoJsonNew]) {
+            for (const feature of geoJson.features) {
+                //console.log('feature', feature);
+                valuesRange.pushValue(getFeatureValue(feature));
+            }
+        }
+        //console.log(valuesRange);
+        this.appState.valuesRange = valuesRange;
     }
 
     /*
