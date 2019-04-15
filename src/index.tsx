@@ -1,5 +1,5 @@
 import { App } from './App';
-import { IGeoJson } from './geo/IGeoJson';
+import { IGeoJson } from './tools/IGeoJson';
 
 main();
 

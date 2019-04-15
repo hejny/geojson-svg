@@ -6,13 +6,14 @@ import { IObservableObject } from 'mobx';
 import {
     aggegateGeoJsonCoordinates,
     aggegateGeoJsonFeatureCoordinates,
-} from '../../geo/aggegateCoordinates';
+} from '../../tools/aggegateCoordinates';
 import {
     getBoundaries,
     isBoundariesDefined,
     boundariesRange,
-} from '../../geo/getBoundaries';
-import { IGeoJsonFeature } from '../../geo/IGeoJson';
+} from '../../tools/getBoundaries';
+import { IGeoJsonFeature } from '../../tools/IGeoJson';
+import { ValueRange } from 'src/tools/ValueRange';
 
 interface IMapProps {
     width: number;
@@ -38,6 +39,15 @@ export const Map = observer(({ appState, width }: IMapProps) => {
     const [lat, lng] = boundariesRange(boundaries);
 
     const height = ((width * lng) / lat) * 1.6;
+
+    const valueRange = new ValueRange();
+    for (const geoJson of appState.opened) {
+        for (const feature of geoJson.features) {
+            if (feature.properties.value) {
+                valueRange.pushValue(getFeatureValue(feature));
+            }
+        }
+    }
 
     return (
         <div className="Map">
@@ -66,15 +76,18 @@ export const Map = observer(({ appState, width }: IMapProps) => {
                                 )
                                 .join(' ')}
                             style={{
-                                fill: colorFromValue(getFeatureValue(feature)),
+                                fill: colorFromValue(
+                                    valueRange.getValue(
+                                        getFeatureValue(feature),
+                                    ),
+                                ),
                                 stroke: 'purple',
                                 strokeWidth: 1,
                             }}
                             onClick={() => {
-                                console.log('feature', feature);
                                 console.log(
-                                    'feature.properties.OKRES',
-                                    feature.properties.id,
+                                    'feature',
+                                    JSON.parse(JSON.stringify(feature)),
                                 );
                             }}
                         />
@@ -90,7 +103,7 @@ function colorFromValue(value: number): string {
 }
 
 function getFeatureValue(feature: IGeoJsonFeature): number {
-    return Math.random(); //feature.properties.AREA/3162900000;
+    return feature.properties.value || 0;
 }
 
 function toRelativeBoundaries(value: number, max: number, min: number): number {

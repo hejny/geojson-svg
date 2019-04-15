@@ -4,7 +4,7 @@ import { IAppState } from './model/IAppState';
 import { IObservableObject, observable } from 'mobx';
 import { Root } from './view/Root/Root';
 import { createDefaultAppState } from './model/createDefaultAppState';
-import { IGeoJson } from './geo/IGeoJson';
+import { IGeoJson } from './tools/IGeoJson';
 
 export class App {
     constructor(private rootElement: HTMLDivElement) {}
