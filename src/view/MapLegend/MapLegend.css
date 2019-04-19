@@ -1,5 +1,27 @@
-/*todo scss*/
 
 .MapLegend{
-    border: 2px solid red;
+    /*/border: 2px solid red;/**/
+    font-size: 1.5em;
+} 
+
+.MapLegend .value{
+    /*/border: 2px solid red;/**/
+    display: inline-block;
+    height: 1em;
+    padding: 5px;
+} 
+
+
+.MapLegend ul{
+    /*/border: 2px solid red;/**/
+    display: inline-block;
+    list-style: none;
+    padding: 0;
+} 
+
+.MapLegend ul li{
+    /*/border: 2px solid red;/**/
+    display: inline-block;
+    width: 1em;
+    height: 1em;
 } 

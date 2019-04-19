@@ -4,11 +4,11 @@ interface IRange {
 }
 
 export class ValuesRange {
-    private values: number[] = [];
-    private range: IRange | null = null;
+    //private values: number[] = [];
+    public range: IRange | null = null;
 
     pushValue(value: number) {
-        this.values.push(value);
+        //this.values.push(value);
 
         if (!this.range) {
             this.range = { min: value, max: value };
@@ -19,6 +19,7 @@ export class ValuesRange {
     }
 
     getValue(value: number): number {
+        //todo DRY
         if (!this.range) {
             throw new Error(`Thare is no value to set the range.`);
         }
@@ -29,5 +30,26 @@ export class ValuesRange {
         //console.log('rangedValue', rangedValue);
 
         return rangedValue;
+    }
+
+    getArray(count: number): number[] {
+        //todo DRY
+        if (!this.range) {
+            throw new Error(`Thare is no value to set the range.`);
+        }
+
+        const array: number[] = [];
+        //let current = this.range.
+
+        for (let i = 0; i < count; i++) {
+            array.push(
+                this.range.min +
+                    ((this.range.max - this.range.min) / count) * i,
+            );
+        }
+
+        array.push(this.range.max);
+
+        return array;
     }
 }

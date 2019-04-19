@@ -66,7 +66,7 @@ export const Map = observer(({ appState, width }: IMapProps) => {
                                 )
                                 .join(' ')}
                             style={{
-                                fill: colorFromValue(
+                                fill: appState.colorScheme.colorFromValue(
                                     appState.valuesRange.getValue(
                                         getFeatureValue(feature),
                                     ),
@@ -87,10 +87,6 @@ export const Map = observer(({ appState, width }: IMapProps) => {
         </div>
     );
 });
-function colorFromValue(value: number): string {
-    const r = Math.floor(value * 255);
-    return `rgb(${r},${r},${r})`;
-}
 
 function toRelativeBoundaries(value: number, max: number, min: number): number {
     return (value - min) / (max - min);
