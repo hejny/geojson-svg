@@ -71,7 +71,7 @@ export const Map = observer(({ appState, width }: IMapProps) => {
                                         getFeatureValue(feature),
                                     ),
                                 ),
-                                stroke: 'purple',
+                                stroke: 'black',
                                 strokeWidth: 1,
                             }}
                             onClick={() => {
