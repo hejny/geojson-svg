@@ -34,5 +34,6 @@
     "gh-pages": "1.1.0",
     "prettier": "1.12.1",
     "typescript": "3.0.1"
-  }
+  },
+  "license": "SEE LICENSE IN LICENSE"
 }
