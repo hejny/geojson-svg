@@ -36,5 +36,9 @@
     "typescript": "3.0.1"
   },
   "license": "SEE LICENSE IN LICENSE",
-  "description": "Show your GeoJSONs in SVG images."
+  "description": "Show your GeoJSONs in SVG images.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hejny/geojson-svg"
+  }
 }
