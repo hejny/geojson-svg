@@ -1,10 +1,10 @@
-import './Root.css';
-import * as React from 'react';
-import { observer } from 'mobx-react';
-import { Map } from '../Map/Map';
-import { IAppState } from '../../model/IAppState';
 import { IObservableObject } from 'mobx';
+import { observer } from 'mobx-react';
+import * as React from 'react';
+import { IAppState } from '../../model/IAppState';
+import { Map } from '../Map/Map';
 import { MapLegend } from '../MapLegend/MapLegend';
+import './Root.css';
 
 interface IAppProps {
     appState: IAppState & IObservableObject;

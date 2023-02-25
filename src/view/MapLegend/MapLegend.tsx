@@ -1,8 +1,8 @@
-import './MapLegend.css';
-import * as React from 'react';
-import { observer } from 'mobx-react';
-import { IAppState } from '../../model/IAppState';
 import { IObservableObject } from 'mobx';
+import { observer } from 'mobx-react';
+import * as React from 'react';
+import { IAppState } from '../../model/IAppState';
+import './MapLegend.css';
 
 interface IMapLegendProps {
     appState: IAppState & IObservableObject;

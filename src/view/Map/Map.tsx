@@ -1,18 +1,17 @@
-import './Map.css';
-import * as React from 'react';
-import { observer } from 'mobx-react';
-import { IAppState } from '../../model/IAppState';
 import { IObservableObject } from 'mobx';
+import { observer } from 'mobx-react';
+import * as React from 'react';
+import { getFeatureValue } from 'src/tools/getFeatureValue';
+import { IAppState } from '../../model/IAppState';
 import {
-    aggegateGeoJsonCoordinates,
-    aggegateGeoJsonFeatureCoordinates,
+  aggegateGeoJsonCoordinates,
+  aggegateGeoJsonFeatureCoordinates
 } from '../../tools/aggegateCoordinates';
 import {
-    getBoundaries,
-    isBoundariesDefined,
-    boundariesRange,
+  boundariesRange, getBoundaries,
+  isBoundariesDefined
 } from '../../tools/getBoundaries';
-import { getFeatureValue } from 'src/tools/getFeatureValue';
+import './Map.css';
 
 interface IMapProps {
     width: number;

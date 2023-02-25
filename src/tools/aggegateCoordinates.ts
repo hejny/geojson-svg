@@ -1,4 +1,4 @@
-import { IGeoJson, ICoord, IGeoJsonFeature } from './IGeoJson';
+import { ICoord, IGeoJson, IGeoJsonFeature } from './IGeoJson';
 
 export function aggegateGeoJsonCoordinates(geoJson: IGeoJson): ICoord[] {
     return geoJson.features.reduce(

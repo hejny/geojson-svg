@@ -1,12 +1,12 @@
+import { IObservableObject, observable } from 'mobx';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { IAppState } from './model/IAppState';
-import { IObservableObject, observable } from 'mobx';
-import { Root } from './view/Root/Root';
 import { createDefaultAppState } from './model/createDefaultAppState';
-import { IGeoJson, IGeoJsonFeature } from './tools/IGeoJson';
-import { ValuesRange } from './tools/ValuesRange';
+import { IAppState } from './model/IAppState';
 import { getFeatureValue } from './tools/getFeatureValue';
+import { IGeoJson } from './tools/IGeoJson';
+import { ValuesRange } from './tools/ValuesRange';
+import { Root } from './view/Root/Root';
 
 export class App {
     constructor(private rootElement: HTMLDivElement) {}

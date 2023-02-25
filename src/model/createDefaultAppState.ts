@@ -1,6 +1,6 @@
+import { ColorScheme } from 'src/tools/ColorScheme';
 import { ValuesRange } from 'src/tools/ValuesRange';
 import { IAppState } from './IAppState';
-import { ColorScheme } from 'src/tools/ColorScheme';
 
 export function createDefaultAppState(): IAppState {
     return {
