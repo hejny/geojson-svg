@@ -20,7 +20,7 @@ export function getBoundaries(coordinates: ICoord[]): IMapBoundaries {
 export function isBoundariesDefined(
     boundaries: IMapBoundaries,
 ): boundaries is IMapBoundariesDefined {
-    return boundaries.every((boundary) => TODO: !!boundary);
+    return boundaries.every((boundary) => !!boundary);
 }
 
 export function boundariesRange(boundaries: IMapBoundariesDefined): ICoord {
