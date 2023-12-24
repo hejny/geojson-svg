@@ -1,6 +1,6 @@
 {
     "name": "geojson-svg",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "homepage": "https://hejny.github.io/geojson-svg/",
     "private": false,
     "scripts": {
