@@ -35,7 +35,7 @@
         "prettier": "1.12.1",
         "typescript": "3.0.1"
     },
-    "license": "SEE LICENSE IN LICENSE",
+    "license": "Apache-2.0",
     "description": "Show your GeoJSONs in SVG images.",
     "repository": {
         "type": "git",
