@@ -39,7 +39,7 @@
     "description": "Show your GeoJSONs in SVG images.",
     "repository": {
         "type": "git",
-        "url": "https://github.com/hejny/geojson-svg"
+        "url": "git+https://github.com/hejny/geojson-svg.git"
     },
     "funding": [
         {
